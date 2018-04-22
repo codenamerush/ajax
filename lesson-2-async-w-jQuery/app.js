@@ -16,11 +16,15 @@
 		    headers:{
 		    	Authorization: 'Client-ID c0a50ca5e35a61925bf1650e161bab67492517e27407a8a2e594787e75779075'
 		    }
-		}).done(addImage);
+		}).done(addImage).fail(function(err) {
+		requestError(err, 'article');
+		});
 
 		$.ajax({
 		    url: `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=81e06ea02cf54f9e90048cd90758f5e7`
-		}).done(addArticles);
+		}).done(addArticles).fail(function(err) {
+		requestError(err, 'article');
+		});
 
 
 		function addImage(images) {
